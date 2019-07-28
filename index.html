@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test</title>
+  </head>
+
+  <body>
+    <p>edit value parameter inside script tag</p>
+    <script>
+      function group_anagrams(arr) {
+        let sortedArr = arr.map(item =>
+          item
+            .split("")
+            .sort()
+            .join("")
+        );
+        let setArr = new Set(sortedArr);
+        let reducedObj = {};
+        for (let setItem of setArr) {
+          let indexArr = sortedArr.reduce((acc, cur, index) => {
+            if (setItem === cur) {
+              acc.push(index);
+            }
+            return acc;
+          }, []);
+          reducedObj[setItem] = indexArr;
+        }
+        let finalArr = [];
+        for (let reduceItem in reducedObj) {
+          finalArr.push(reducedObj[reduceItem].map(item => arr[item]));
+        }
+        function checkArr(arr) {
+            let as=[]
+            arr.map((item,index)=>{
+                as.push(item)
+            })
+            return as[1]
+        }
+
+
+        return finalArr.filter(checkArr);
+      }
+      console.log(
+        group_anagrams(["bat", "code", "tab", "abt", "cab", "crazy", "tac"])
+      );
+
+      document.write("available word<br>")
+      document.write(["bat", "code", "cat", "act", "cab", "crazy", "tac"]);
+      document.write("<br><br>")
+
+
+      document.write("available anagram from word<br>")
+      document.write(
+        group_anagrams(["bat", "code", "cat", "act", "cab", "crazy", "tac"])
+      );
+
+    </script>
+  </body>
+</html>
